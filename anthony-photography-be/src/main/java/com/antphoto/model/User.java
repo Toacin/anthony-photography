@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +24,7 @@ public class User implements Serializable {
     private String password;
 
     private String firstName;
+
     private String lastName;
 
     @Transient
