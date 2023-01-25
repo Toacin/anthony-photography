@@ -37,11 +37,7 @@ public class User implements Serializable {
     )
     private List<Photo> photos;
 
-    @ManyToMany
-    @JoinTable(name = "USER_ORDERS",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "orderId")
-    )
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Order> orders;
 
     public User() {
