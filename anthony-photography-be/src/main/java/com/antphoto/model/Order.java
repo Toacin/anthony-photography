@@ -19,6 +19,15 @@ public class Order implements Serializable {
 
     private Integer userId;
 
+    public Order(Integer id, Date date, Integer userId) {
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+    }
+
+    public Order() {
+    }
+
     public Integer getId() {
         return id;
     }
