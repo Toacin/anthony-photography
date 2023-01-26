@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
-    List<Order> findAllByUserId(Integer id) throws Exception;
+//    List<Order> findAllByUserId(Integer id) throws Exception;
 }

@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Integer> {
-    List<Photo> findAllPhotosByUserId(Integer id) throws Exception;
 }

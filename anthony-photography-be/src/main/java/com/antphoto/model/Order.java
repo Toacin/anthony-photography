@@ -1,21 +1,24 @@
 package com.antphoto.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "order")
+@Table(name = "userOrders")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Date date;
+    @Nonnull
+    @Temporal(TemporalType.DATE)
+    @Column(name = "date")
+    private Date date = new Date();
 
     private Integer userId;
 
@@ -26,6 +29,11 @@ public class Order implements Serializable {
     }
 
     public Order() {
+    }
+
+    public Order(Integer id, Date date) {
+        this.id = id;
+        this.date = date;
     }
 
     public Integer getId() {
