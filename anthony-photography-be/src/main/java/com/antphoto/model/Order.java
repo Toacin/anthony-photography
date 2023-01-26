@@ -5,6 +5,7 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +22,14 @@ public class Order implements Serializable {
     private Date date = new Date();
 
     private Integer userId;
+
+    @ManyToMany
+    @JoinTable(name = "ORDER_PHOTO",
+            joinColumns = @JoinColumn(name = "orderId"),
+            inverseJoinColumns = @JoinColumn(name = "photoId")
+    )
+
+    private List<Photo> photos;
 
     public Order(Integer id, Date date, Integer userId) {
         this.id = id;
