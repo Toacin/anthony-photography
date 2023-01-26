@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, Integer> {
-    @Query(value = "SELECT price FROM Photo JOIN  User u WHERE u.id = :idd", nativeQuery = true)
+    @Query(value = "SELECT * FROM user_photos JOIN photo WHERE user_id = :idd", nativeQuery = true)
     List<Photo> getPhotosByUserId(@Param("idd") Integer idd);
 
 }
