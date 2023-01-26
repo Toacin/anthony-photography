@@ -10,27 +10,30 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class UserController {
     @Autowired
     UserRepository repository;
 
     @GetMapping("/api/users")
     public List<User> getAllUsers() {
+        System.out.println("In the basic get for users");
         List<User> userList = repository.findAll();
         return userList;
     }
 
     @GetMapping("/api/users/{id}")
     public User getSingleUser(@PathVariable Integer id) {
-        User user = repository.getById(id);
+        User user = repository.getReferenceById(id);
         return user;
     }
 
     @PostMapping("/api/users")
     public User addUser(@RequestBody User user) {
+        System.out.println(user.toString());
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         repository.save(user);
+        System.out.println(user.toString());
         return user;
     }
 
@@ -43,6 +46,7 @@ public class UserController {
         }
         return user;
     }
+
 
     @DeleteMapping("/api/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

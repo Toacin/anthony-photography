@@ -37,7 +37,7 @@ public class User implements Serializable {
     )
     private List<Photo> photos;
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
 
     public User() {
@@ -50,6 +50,18 @@ public class User implements Serializable {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(Integer id, String username, String email, String password, String firstName, String lastName, boolean loggedIn, List<Photo> photos, List<Order> orders) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.loggedIn = loggedIn;
+        this.photos = photos;
+        this.orders = orders;
     }
 
     public Integer getId() {

@@ -19,6 +19,7 @@ public class Photo implements Serializable {
 
     private Double price;
 
+
     @Lob
     @Column(length = 100000)
     private byte[] image;
@@ -33,21 +34,26 @@ public class Photo implements Serializable {
     )
     private List<Tag> tags;
 
+    @OneToOne
+    private Photo highResPhotoId;
+
     public Photo() {
     }
 
-    public Photo(Integer id, Double price, byte[] image) {
+    public Photo(Integer id, Double price, byte[] image, Photo highResPhotoId) {
         this.id = id;
         this.price = price;
         this.image = image;
+        this.highResPhotoId = highResPhotoId;
     }
 
-    public Photo(Integer id, Double price, byte[] image, List<User> users, List<Tag> tags) {
+    public Photo(Integer id, Double price, byte[] image, List<User> users, List<Tag> tags, Photo highResPhotoId) {
         this.id = id;
         this.price = price;
         this.image = image;
         this.users = users;
         this.tags = tags;
+        this.highResPhotoId = highResPhotoId;
     }
 
     public Integer getId() {
@@ -90,17 +96,25 @@ public class Photo implements Serializable {
         this.tags = tags;
     }
 
+    public Photo getHighResPhotoId() {
+        return highResPhotoId;
+    }
+
+    public void setHighResPhotoId(Photo highResPhotoId) {
+        this.highResPhotoId = highResPhotoId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Photo photo = (Photo) o;
-        return Objects.equals(id, photo.id) && Objects.equals(price, photo.price) && Arrays.equals(image, photo.image) && Objects.equals(users, photo.users) && Objects.equals(tags, photo.tags);
+        return Objects.equals(id, photo.id) && Objects.equals(price, photo.price) && Arrays.equals(image, photo.image) && Objects.equals(users, photo.users) && Objects.equals(tags, photo.tags) && Objects.equals(highResPhotoId, photo.highResPhotoId);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, price, users, tags);
+        int result = Objects.hash(id, price, users, tags, highResPhotoId);
         result = 31 * result + Arrays.hashCode(image);
         return result;
     }
@@ -113,6 +127,7 @@ public class Photo implements Serializable {
                 ", image=" + Arrays.toString(image) +
                 ", users=" + users +
                 ", tags=" + tags +
+                ", highResPhotoId=" + highResPhotoId +
                 '}';
     }
 }
