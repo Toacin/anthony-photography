@@ -4,10 +4,7 @@ import com.antphoto.model.Photo;
 import com.antphoto.repository.PhotoRepository;
 import com.antphoto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,21 @@ public class PhotoController {
     public List<Photo> getUserPhotos(@PathVariable Integer userId){
         List<Photo> photos = repository.getPhotosByUserId(userId);
         return photos;
+    }
+
+
+    @PostMapping("/api/photos")
+    public Photo createPhoto(@RequestBody Photo photo){
+        Photo newPhoto = repository.save(photo);
+        return newPhoto;
+    }
+
+    @PutMapping("/api/photos/{id}")
+    public Photo updatePhoto(@RequestBody Photo photo, @PathVariable Integer id){
+        Photo updatedPhoto = repository.getReferenceById(id);
+        photo.setId(updatedPhoto.getId());
+        repository.save(photo);
+        return photo;
     }
 
 

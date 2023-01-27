@@ -1,5 +1,6 @@
 package com.antphoto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -80,6 +81,7 @@ public class Photo implements Serializable {
         this.image = image;
     }
 
+    @JsonBackReference
     public List<User> getUsers() {
         return users;
     }

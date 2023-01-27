@@ -28,13 +28,19 @@ public class Order implements Serializable {
             joinColumns = @JoinColumn(name = "orderId"),
             inverseJoinColumns = @JoinColumn(name = "photoId")
     )
-
     private List<Photo> photos;
 
     public Order(Integer id, Date date, Integer userId) {
         this.id = id;
         this.date = date;
         this.userId = userId;
+    }
+
+    public Order(Integer id, Date date, Integer userId, List<Photo> photos) {
+        this.id = id;
+        this.date = date;
+        this.userId = userId;
+        this.photos = photos;
     }
 
     public Order() {
@@ -67,6 +73,14 @@ public class Order implements Serializable {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
     }
 
     @Override
