@@ -13,4 +13,9 @@ public interface PhotoRepository extends JpaRepository<Photo, Integer> {
     @Query(value = "SELECT * FROM user_photos JOIN photo WHERE user_id = :idd", nativeQuery = true)
     List<Photo> getPhotosByUserId(@Param("idd") Integer idd);
 
+    @Query(value = "SELECT * FROM order_photo JOIN photo WHERE order_id = :id", nativeQuery = true)
+    List<Photo> getPhotosByOrderId(@Param("id") Integer id);
+
+
+
 }
