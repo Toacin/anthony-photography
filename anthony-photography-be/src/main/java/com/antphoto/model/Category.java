@@ -20,13 +20,22 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Tag> tags;
 
-    public Category(Integer id, String name, List<Tag> tags) {
+    @OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Photo> photos;
+
+    public Category(Integer id, String name, List<Tag> tags, List<Photo> photos) {
         this.id = id;
         this.name = name;
         this.tags = tags;
+        this.photos = photos;
     }
 
     public Category() {
+    }
+
+    public Category(Integer id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Integer getId() {
@@ -53,17 +62,25 @@ public class Category implements Serializable {
         this.tags = tags;
     }
 
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photo> photos) {
+        this.photos = photos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(tags, category.tags);
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(tags, category.tags) && Objects.equals(photos, category.photos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, tags);
+        return Objects.hash(id, name, tags, photos);
     }
 
     @Override
@@ -72,6 +89,7 @@ public class Category implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tags=" + tags +
+                ", photos=" + photos +
                 '}';
     }
 }

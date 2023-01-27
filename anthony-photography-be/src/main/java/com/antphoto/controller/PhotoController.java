@@ -4,6 +4,7 @@ import com.antphoto.model.Photo;
 import com.antphoto.repository.PhotoRepository;
 import com.antphoto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,11 @@ public class PhotoController {
         return photos;
     }
 
+    @GetMapping("/apia/photos/category/{categoryId}")
+    public List<Photo> getCategoryPhotos(@PathVariable Integer categoryId) {
+        List<Photo> photos = repository.getPhotosByCategoryId(categoryId);
+        return photos;
+    }
 
     @PostMapping("/api/photos")
     public Photo createPhoto(@RequestBody Photo photo){
@@ -49,5 +55,9 @@ public class PhotoController {
         return photo;
     }
 
-
+    @DeleteMapping("/api/photos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePhoto(@PathVariable Integer photoId) {
+        repository.deleteById(photoId);
+    }
 }
