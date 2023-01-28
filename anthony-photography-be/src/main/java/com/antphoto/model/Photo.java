@@ -2,6 +2,7 @@ package com.antphoto.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,17 +26,17 @@ public class Photo implements Serializable {
     @Column(length = 100000)
     private byte[] image;
 
-    @ManyToMany(mappedBy = "photos")
+    @ManyToMany(mappedBy = "photos", fetch = FetchType.LAZY)
     private List<User> users;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PHOTO_TAG",
             joinColumns = @JoinColumn(name = "photoId"),
             inverseJoinColumns = @JoinColumn(name = "tagId")
     )
     private List<Tag> tags;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Photo highResPhotoId;
 
     private Integer categoryId;
@@ -85,15 +86,16 @@ public class Photo implements Serializable {
         this.image = image;
     }
 
-    @JsonBackReference
-    public List<User> getUsers() {
-        return users;
-    }
+//    @JsonBackReference
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
+//    @JsonManagedReference
     public List<Tag> getTags() {
         return tags;
     }

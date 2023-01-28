@@ -114,7 +114,8 @@ public class User implements Serializable {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-    @JsonManagedReference
+
+//    @JsonManagedReference
     public List<Photo> getPhotos() {
         return photos;
     }

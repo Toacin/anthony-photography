@@ -19,8 +19,14 @@ public class CategoryController {
         return categories;
     }
 
+    @GetMapping("/api/categories/{id}")
+    public Category getSingleCategory(@PathVariable Integer id) {
+        Category category = repository.getReferenceById(id);
+        return category;
+    }
+
     @PutMapping("/api/categories/{id}")
-    public Category updateCategory(@RequestBody Category category, @PathVariable int id) {
+    public Category updateCategory(@RequestBody Category category, @PathVariable Integer id) {
         Category tempCategory = repository.getReferenceById(id);
         category.setId(tempCategory.getId());
         repository.save(category);
@@ -35,7 +41,7 @@ public class CategoryController {
 
     @DeleteMapping("/api/categories/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCategory(@PathVariable Integer categoryId) {
-        repository.deleteById(categoryId);
+    public void deleteCategory(@PathVariable Integer id) {
+        repository.deleteById(id);
     }
 }
