@@ -1,6 +1,7 @@
 package com.antphoto.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -20,7 +21,7 @@ public class Tag implements Serializable {
 
     private Integer categoryId;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private List<Photo> photos;
 
     public Tag(Integer id, String name, Integer categoryId) {
@@ -39,13 +40,14 @@ public class Tag implements Serializable {
     public Tag() {
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
+//    @JsonBackReference
+//    public List<Photo> getPhotos() {
+//        return photos;
+//    }
+//
+//    public void setPhotos(List<Photo> photos) {
+//        this.photos = photos;
+//    }
 
 
     public Integer getId() {

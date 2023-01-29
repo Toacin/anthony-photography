@@ -1,9 +1,12 @@
 package com.antphoto.controller;
 
 import com.antphoto.model.Photo;
+import com.antphoto.model.Tag;
 import com.antphoto.repository.PhotoRepository;
+import com.antphoto.repository.TagsRepository;
 import com.antphoto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,9 @@ public class PhotoController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TagsRepository tagsRepository;
 
     @GetMapping("/api/photos")
     public List<Photo> getAllPhotos() {
@@ -34,6 +40,20 @@ public class PhotoController {
         return photos;
     }
 
+    @GetMapping("/api/photos/category/{categoryId}")
+    public List<Photo> getCategoryPhotos(@PathVariable Integer categoryId) {
+        List<Photo> photos = repository.getPhotosByCategoryId(categoryId);
+        return photos;
+    }
+
+    @PutMapping("/api/photos/tags/{photoId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addTagsToPhoto(@PathVariable Integer photoId, @RequestBody int[] arrayOfTagIds) {
+        System.out.println("made to photo tag method");
+        for (int i=0; i<arrayOfTagIds.length; i++) {
+            tagsRepository.addTagsToPhoto(photoId, arrayOfTagIds[i]);
+        }
+    }
 
     @PostMapping("/api/photos")
     public Photo createPhoto(@RequestBody Photo photo){
@@ -49,5 +69,9 @@ public class PhotoController {
         return photo;
     }
 
-
+    @DeleteMapping("/api/photos/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePhoto(@PathVariable Integer photoId) {
+        repository.deleteById(photoId);
+    }
 }
