@@ -1,0 +1,20 @@
+{
+  "name": "anthony-photography",
+  "version": "1.0.0",
+  "description": "A digital art storefront and personal portfolio for photographer Anthony",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toacin/anthony-photography.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toacin/anthony-photography/issues"
+  },
+  "homepage": "https://github.com/Toacin/anthony-photography#readme"
+}
