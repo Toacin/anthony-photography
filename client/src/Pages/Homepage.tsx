@@ -1,22 +1,16 @@
 import logo from '../logo.svg';
+import backdrop from '../Assets/mock.jpg';
+import Header from '../Components/Header';
+import GalleryContainer from '../Components/GalleryContainer';
 
 export default function Homepage() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+        <div className="App home-bg-image w-full h-screen">
+            <Header/>
+            <div className='flex w-full h-3/5 justify-center items-center'>
+                <h1 className="text-slate-100 text-[3em]">Welcome to Hello World</h1>
+            </div>
+            <GalleryContainer/>
         </div>
     )
 }
