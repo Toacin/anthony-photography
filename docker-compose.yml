@@ -1,33 +1,35 @@
+version: "1"
 services:
   app:
-    image: node:18-alpine
-    command:
-      - /bin/sh
-      - -c
-      - |
-        npm install
-        npm run build
-    working_dir: /dockerReactTest
-    volumes:
-      - ./:/dockerReactTest
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: noteTaker_db
-      PORT: 3000
-      NODE_ENV: production
-  server:
-    image: eclipse-temurin:17-jdk-jammy
-    command:
+    image: anthony-front-end
+    build:
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      -
+      - "80:80"
   mysql:
     image: mysql:8.0
+    networks:
+      - anthony-photo-net
     volumes:
       - anthony-photo-mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: anthony_photo_db
+  server:
+    image: anthony-back-end
+    build:
+      context: ./anthony-photography-be
+      dockerfile: Dockerfile
+    networks:
+      - anthony-photo-net
+    ports:
+      - "8082:8082"
+    environment:
+      DB_PASSWORD: secret
+    depends_on:
+      - mysql
 volumes:
-  reacttest-mysql-data:
+  anthony-photo-mysql-data:
+networks:
+  anthony-photo-net:
