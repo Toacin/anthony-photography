@@ -35,6 +35,24 @@
   background-size: 100% 100%;
 }
 
+.mock-one {
+  background-image: url("./Assets/mock.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.mock-two {
+  background-image: url("./Assets/mock2.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.mock-three {
+  background-image: url("./Assets/Mock3.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

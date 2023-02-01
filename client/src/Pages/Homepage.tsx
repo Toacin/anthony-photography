@@ -7,7 +7,7 @@ export default function Homepage() {
     return (
         <div className="App home-bg-image w-full h-screen">
             <Header/>
-            <div className='flex w-full h-3/5 justify-center items-center'>
+            <div className='flex w-full h-3/5 justify-center items-center mb-16'>
                 <h1 className="text-slate-100 text-[3em]">Welcome to Hello World</h1>
             </div>
             <GalleryContainer/>
