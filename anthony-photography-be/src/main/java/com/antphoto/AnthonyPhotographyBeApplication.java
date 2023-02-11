@@ -20,7 +20,7 @@ public class AnthonyPhotographyBeApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(@NotNull CorsRegistry registry){
-				registry.addMapping("/api").allowedOrigins("/*");
+				registry.addMapping("/api").allowedOrigins("http://localhost:3000");
 			}
 		};
 	}
