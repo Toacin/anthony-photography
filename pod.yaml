@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: anthony-photo-pod
+  labels: 
+    app: photography
+spec:
+  containers:
+  - name: db
+    image: mysql:8.0
+    env: 
+    - name: MYSQL_ROOT_PASSWORD
+      value: secret
+  - name: server
+    image: unheardof77/anthony-back-end:1.1
+    env:
+    - name: DB_PASSWORD
+      value: secret
+  - name: front-end
+    image: unheardof77/anthony-front-end:1.0
