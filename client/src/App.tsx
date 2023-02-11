@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, HashRouter, Routes } from 'react-router-dom';
-import { Hash } from 'crypto';
+import AdminPage from './Pages/AdminPage';
 import Homepage from './Pages/Homepage';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Homepage/>}/>
+        <Route path='/admin/*' element={<AdminPage/>}/>
       </Routes>
     </HashRouter>
   );
